@@ -28,4 +28,13 @@ const protect = async (req, res, next) => {
   }
 };
 
-module.exports = { protect };
+const checkRole = (role) => {
+  return (req, res, next) => {
+      if (req.user.role !== role) {
+          return res.status(403).json({ error: 'Access denied' });
+      }
+      next();
+  };
+};
+
+module.exports = { protect, checkRole };

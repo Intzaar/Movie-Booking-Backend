@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const { adminLogin } = require("../Controllers/authC");
-const { addMovie, updateMovie, deleteMovie } = require("../Controllers/adminC");
-const { protect } = require("../Middleware/authB");
+const { addMovie, deleteMovie } = require("../Controllers/adminC");
+const { protect,checkRole } = require("../Middleware/authB");
 
 // login
 // add movie
@@ -10,8 +10,6 @@ const { protect } = require("../Middleware/authB");
 // update movie
 
 router.post("/login", adminLogin);
-router.post("/addMovie", protect, addMovie);
-router.put("/updateMovie/:id", protect, updateMovie);
-router.delete("/deleteMovie/:id", protect, deleteMovie);
-
+router.post('/movies', protect, checkRole('admin'), addMovie);
+router.delete('/movies/:id', protect, checkRole('admin'), deleteMovie);
 module.exports = router;

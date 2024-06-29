@@ -10,7 +10,7 @@ const { protect } = require("../Middleware/authB");
 
 router.post("/register", register);
 router.post("/login", login);
-router.post("/bookMovie", protect, bookMovie);
-router.delete("/cancelBooking", protect, cancelBooking);
+router.post("/book/:id", protect, bookMovie);
+router.post("/cancel/:id", protect, cancelBooking);
 
 module.exports = router;

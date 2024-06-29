@@ -5,14 +5,23 @@ const movieStruct = new mongoose.Schema({
     type: String,
     required: true,
   },
-  availableSeats: {
+  totalSeats: {
     type: Number,
     required: true,
+  },
+  seatsBooked: {
+    type: Number,
+    default: 0,
   },
   duration: {
     type: String,
     required: true,
   },
+  bookings: [
+    {
+      userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    },
+  ],
 });
 
 module.exports = mongoose.model("Movie", movieStruct);
